@@ -7,14 +7,6 @@
 		"build": "next build",
 		"postbuild": "next-sitemap --config next-sitemap.config.js",
 		"start": "next start",
-		"lint": "npx @biomejs/biome lint .",
-		"lint:write": "npx @biomejs/biome lint --write .",
-		"lint:error": "npx @biomejs/biome lint .",
-		"format": "npx @biomejs/biome format .",
-		"format:write": "npx @biomejs/biome format --write .",
-		"check": "npx @biomejs/biome check .",
-		"check:write": "npx @biomejs/biome check --write .",
-		"prepare": "husky",
 		"typecheck": "npx tsc --noEmit"
 	},
 	"dependencies": {
@@ -41,19 +33,11 @@
 		"zustand": "5.0.6"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.0.6",
-		"@commitlint/cli": "19.8.1",
-		"@commitlint/config-conventional": "19.8.1",
-		"@eslint/eslintrc": "^3",
 		"@tailwindcss/postcss": "4.1.11",
 		"@types/node": "^20",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
 		"autoprefixer": "10.4.21",
-		"eslint": "^9",
-		"eslint-config-next": "15.3.5",
-		"husky": "9.1.7",
-		"lint-staged": "16.1.2",
 		"tailwindcss": "^4",
 		"typescript": "^5"
 	}
