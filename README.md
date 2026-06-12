@@ -1,92 +1,57 @@
-# Next.js 15 + Tailwind CSS v4 + TypeScript Starter
+# iou-fe
 
-This is a starter template for building modern web applications with Next.js 15, Tailwind CSS v4, and TypeScript. It's packed with features to streamline your development process and build high-quality, scalable applications.
+Next.js 15 frontend for the IOU app. Lets Bank, Alice, and Bob issue, split, merge, and transfer IOUs backed by a Canton DAML ledger.
 
------
+## Prerequisites
 
-## 🚀 Features
+- Node.js 20+
+- pnpm
+- `iou-be` running on `http://localhost:4000`
 
-This starter template is packed with the following features:
-
-  * **⚡️ Next.js 15:** The latest version of the popular React framework, with support for the App Router.
-  * **⚛️ React 19:** The newest version of the React library for building user interfaces.
-  * **✨ TypeScript:** A typed superset of JavaScript that compiles to plain JavaScript.
-  * **💨 Tailwind CSS v4:** A utility-first CSS framework for rapid UI development.
-  * **💎 Pre-built Components:** A collection of ready-to-use components that automatically adapt to your brand colors.
-  * **📈 Absolute Import and Path Alias:** Import components using the `@/` prefix.
-  * **📏 ESLint:** Find and fix problems in your code, and automatically sort your imports.
-  * **🐶 Husky & Lint Staged:** Run scripts on your staged files before they are committed to ensure code quality.
-  * **🤖 Conventional Commit Lint:** Enforce a consistent commit message format.
-  * **🗺 Site Map:** Automatically generate a `sitemap.xml` for your site.
-
------
-
-## Getting Started
-
-### 1\. Clone the template
-
-You can use this repository as a template to create a new project.
-
-1. By clicking use this template
-
-   ![image](https://github.com/user-attachments/assets/40a5bbd6-6be1-4059-b003-c1cc6bfce56a)
-
-
-   
-
-### 2\. Install dependencies
-
-It is recommended to use `pnpm` to install the dependencies:
+## Setup
 
 ```bash
 pnpm install
 ```
 
-### 3\. Run the development server
+Create `.env.local` in this directory:
 
-Start the development server with the following command:
+```env
+NEXT_PUBLIC_RUN_MODE=development
+NEXT_PUBLIC_API_URL_DEV=http://localhost:4000
+NEXT_PUBLIC_API_URL_PROD=https://<your-deployed-backend>
+SITE_URL=http://localhost:3000/
+```
+
+## Development
+
+Start the full stack in order:
 
 ```bash
+# Terminal 1 — Canton sandbox + JSON API (inside daml-example/)
+daml start
+
+# Terminal 2 — Express backend (inside iou-be/)
+pnpm dev
+
+# Terminal 3 — Next.js frontend (this directory)
 pnpm dev
 ```
 
-Open [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) in your browser to see the result. You can start editing the page by modifying `src/app/page.tsx`.
+Open `http://localhost:3000`. You will be redirected to `/dashboard`.
 
-### 4\. Customize the template
+## Usage
 
-There are a few things you need to change to customize the template:
+1. Select a party from the **Acting as:** dropdown (top-right of the dashboard).
+2. As **Bank** — click **Issue IOU** to create an IOU for Alice or Bob.
+3. As **Alice** or **Bob** — use **Split**, **Merge**, or **Transfer** on any IOU you own.
+4. Go to **Pending Transfers** to accept or reject incoming transfers.
 
-  * **`!CHANGETHIS` comments:** Find all comments with `!CHANGETHIS` in the code and follow the instructions.
-  * **`package.json`:** Change the package name to your project's name.
-  * **Favicons and other assets:** Replace the default favicons and other assets with your own.
-
-### 5\. Cleanup Script
-
-This starter template includes several optional feature modules. If you don't need a specific feature, you can run the cleanup script to remove the associated files, dependencies, and provider configurations, keeping your project clean.
-
-### Usage
-
-To use the script, run the following command from the project root:
+## Production build
 
 ```bash
-./cleanup.sh <component_name>
-```
-Available components:
-You can replace <component_name> with one of the following options:
-* `api`: Removes all files and dependencies related to API interaction and state management. This includes axios, @tanstack/react-query, zustand, react-hot-toast, and the authentication hooks/stores.
-* `table`: Removes the Table component, which is built on @tanstack/react-table, and its related files and dependencies like nuqs.
-* `form`: Removes the advanced form components and their dependencies, including react-hook-form, react-dropzone, react-select, and the lightbox modal.
-* `button`: Removes the custom Button, IconButton, and related link components (ButtonLink, IconLink).
-* `dialog`: Removes the custom ConfirmationDialog, and its dependencies.
-
-Note: if the script is not executeable yet, you can run the following command
-```bash
-chmod +x cleanup.sh
+pnpm build
+pnpm start
 ```
 
------
-
-## Commit Message Convention
-
-This starter template uses the [Conventional Commits](https://www.conventionalcommits.org/) specification. This ensures a consistent and readable commit history.
-
+Switch `NEXT_PUBLIC_RUN_MODE` to `production` and set `NEXT_PUBLIC_API_URL_PROD` to your deployed `iou-be` URL.
