@@ -3,12 +3,10 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import UnstyledLink from "@/components/links/UnstyledLink";
-import NextImage from "@/components/NextImage";
 
 const navLinks = [
-	{ href: "/", label: "Beranda" },
-	{ href: "/about", label: "Tentang Kami" },
-	{ href: "/gallery", label: "Galeri" },
+	{ href: "/dashboard", label: "IOU Dashboard" },
+	{ href: "/transfers", label: "Pending Transfers" },
 ];
 
 export default function Navbar() {
@@ -45,22 +43,8 @@ export default function Navbar() {
 			<div className="px-4 sm:px-6 md:px-8 lg:px-[8%] mx-auto">
 				<div className="flex items-center justify-between h-20 max-md:h-16">
 					{/* Logo */}
-					<UnstyledLink
-						href={`/`}
-						className="flex items-center gap-2 max-md:gap-1"
-					>
-						<NextImage
-							width={552}
-							height={388}
-							src={"/next.svg"}
-							alt="Logo"
-							priority
-							serverStaticImg
-							className="flex max-w-[75px] items-center md:max-w-[100px]"
-						/>
-						<p className="text-xl max-md:text-base max-lg:hidden max-md:block text-gray-900 font-semibold">
-							Next Template
-						</p>
+					<UnstyledLink href="/" className="flex items-center gap-2">
+						<span className="text-xl font-bold text-gray-900">IOU App</span>
 					</UnstyledLink>
 
 					{/* Desktop Menu */}
