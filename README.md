@@ -42,7 +42,8 @@ Open `http://localhost:3000`. You will be redirected to `/dashboard`.
 
 ## Usage
 
-1. Select a party from the **Acting as:** dropdown (top-right of the dashboard).
+1. Paste a party's API key into the box at the top right and click **Add**. iou-be decides which party you act as from the key (`PARTY_API_KEYS` in iou-be's `.env`). Keys are kept in this browser's localStorage.
+   Add the Bank, Alice and Bob keys to switch between them from the **Acting as:** dropdown.
 2. As **Bank** — click **Issue IOU** to create an IOU for Alice or Bob.
 3. As **Alice** or **Bob** — use **Split**, **Merge**, or **Transfer** on any IOU you own.
 4. Go to **Pending Transfers** to accept or reject incoming transfers.

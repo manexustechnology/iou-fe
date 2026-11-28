@@ -1,17 +1,26 @@
 import { api } from "@/lib/api";
 import type { ApiResponse } from "@/types/api";
 import type { IouContract, IouTransferContract, Party } from "@/types/iou";
+import { anyPartyKey, getPartyKey } from "@/lib/party-keys";
 
-const withParty = (partyId: string) => ({
-  headers: { "x-acting-party": partyId },
+// The backend acts as whichever party the API key belongs to.
+const withKey = (key: string | undefined) => ({
+  headers: { "x-api-key": key ?? "" },
 });
 
+const withParty = (partyId: string) => withKey(getPartyKey(partyId));
+
 export const iouApi = {
-  listParties: () => api.get<ApiResponse<Party[]>>("/api/parties"),
+  whoami: (key: string) =>
+    api.get<ApiResponse<{ party: string }>>("/api/me", withKey(key)),
+
+  listParties: () =>
+    api.get<ApiResponse<Party[]>>("/api/parties", withKey(anyPartyKey())),
 
   listIous: (partyId: string) =>
     api.get<ApiResponse<IouContract[]>>(
       `/api/ious?party=${encodeURIComponent(partyId)}`,
+      withParty(partyId),
     ),
 
   issueIou: (
@@ -42,6 +51,7 @@ export const iouApi = {
   listTransfers: (partyId: string) =>
     api.get<ApiResponse<IouTransferContract[]>>(
       `/api/transfers?party=${encodeURIComponent(partyId)}`,
+      withParty(partyId),
     ),
 
   acceptTransfer: (transferContractId: string, actingParty: string) =>

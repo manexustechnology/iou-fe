@@ -84,7 +84,7 @@ export default function DashboardPage() {
               {!isLoading && !selectedParty && (
                 <tr>
                   <td colSpan={5} className="px-4 py-8 text-center text-sm text-gray-400">
-                    Select a party to view IOUs
+                    Enter an API key (top right) to view IOUs
                   </td>
                 </tr>
               )}
