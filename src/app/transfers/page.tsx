@@ -100,7 +100,7 @@ export default function TransfersPage() {
               {!isLoading && !selectedParty && (
                 <tr>
                   <td colSpan={6} className="px-4 py-8 text-center text-sm text-gray-400">
-                    Select a party to view pending transfers
+                    Enter an API key (top right) to view pending transfers
                   </td>
                 </tr>
               )}
